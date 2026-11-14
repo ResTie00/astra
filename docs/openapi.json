@@ -1,0 +1,927 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "OpenAPI definition",
+        "version": "v0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Generated server url"
+        }
+    ],
+    "paths": {
+        "/api/telemetry": {
+            "post": {
+                "tags": [
+                    "telemetry-controller"
+                ],
+                "operationId": "ingestTelemetry",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TelemetryBatchRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/space-weather": {
+            "post": {
+                "tags": [
+                    "space-weather-controller"
+                ],
+                "operationId": "register",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SpaceWeatherEventRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/replan": {
+            "post": {
+                "tags": [
+                    "replan-controller"
+                ],
+                "operationId": "replan",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReplanStartRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReplanResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/replan/{runId}/accept": {
+            "post": {
+                "tags": [
+                    "replan-controller"
+                ],
+                "operationId": "accept",
+                "parameters": [
+                    {
+                        "name": "runId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AcceptPlanRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AcceptPlanResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/environment": {
+            "post": {
+                "tags": [
+                    "telemetry-controller"
+                ],
+                "operationId": "ingestEnvironment",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EnvironmentBatchRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/demo/reset": {
+            "post": {
+                "tags": [
+                    "demo-controller"
+                ],
+                "operationId": "reset",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/checkin": {
+            "post": {
+                "tags": [
+                    "checkin-controller"
+                ],
+                "operationId": "checkin",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CheckinRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CheckinResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/alerts/{id}/ack": {
+            "post": {
+                "tags": [
+                    "alert-controller"
+                ],
+                "operationId": "acknowledge",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/stream": {
+            "get": {
+                "tags": [
+                    "stream-controller"
+                ],
+                "operationId": "stream",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "text/event-stream": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SseEmitter"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/debug/blind-spot/{crewId}": {
+            "get": {
+                "tags": [
+                    "debug-controller"
+                ],
+                "operationId": "blindSpot",
+                "parameters": [
+                    {
+                        "name": "crewId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BlindSpotDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/crew/{id}/status": {
+            "get": {
+                "tags": [
+                    "status-controller"
+                ],
+                "operationId": "getCrewStatus",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CrewStatusResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/alerts": {
+            "get": {
+                "tags": [
+                    "alert-controller"
+                ],
+                "operationId": "recent",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AlertDto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "TelemetryBatchRequest": {
+                "type": "object",
+                "properties": {
+                    "readings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TelemetryReadingDto"
+                        },
+                        "minItems": 1
+                    }
+                },
+                "required": [
+                    "readings"
+                ]
+            },
+            "TelemetryReadingDto": {
+                "type": "object",
+                "properties": {
+                    "crewId": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "metric": {
+                        "type": "string",
+                        "enum": [
+                            "HEART_RATE",
+                            "HRV_RMSSD",
+                            "SPO2",
+                            "BODY_TEMP",
+                            "SLEEP_HOURS",
+                            "DOSE_RATE"
+                        ]
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "crewId",
+                    "metric",
+                    "timestamp"
+                ]
+            },
+            "SpaceWeatherEventRequest": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "onset": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "peak": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "peakProtonFluxPfu": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "durationHours": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "required": [
+                    "onset",
+                    "peak",
+                    "type"
+                ]
+            },
+            "ReplanStartRequest": {
+                "type": "object",
+                "properties": {
+                    "reason": {
+                        "type": "string"
+                    }
+                }
+            },
+            "AssignmentDto": {
+                "type": "object",
+                "properties": {
+                    "taskId": {
+                        "type": "string"
+                    },
+                    "taskName": {
+                        "type": "string"
+                    },
+                    "taskType": {
+                        "type": "string",
+                        "enum": [
+                            "EVA",
+                            "INTERNAL",
+                            "EXERCISE",
+                            "SLEEP"
+                        ]
+                    },
+                    "crewId": {
+                        "type": "string"
+                    },
+                    "crewName": {
+                        "type": "string"
+                    },
+                    "start": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "end": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "CrewRiskDto": {
+                "type": "object",
+                "properties": {
+                    "crewId": {
+                        "type": "string"
+                    },
+                    "crewName": {
+                        "type": "string"
+                    },
+                    "doseP50MilliSv": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "doseP95MilliSv": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "exceedBudgetProbability": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "PlanChangeDto": {
+                "type": "object",
+                "properties": {
+                    "taskId": {
+                        "type": "string"
+                    },
+                    "taskName": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "MOVED",
+                            "REASSIGNED",
+                            "MOVED_AND_REASSIGNED",
+                            "DROPPED",
+                            "ADDED"
+                        ]
+                    },
+                    "fromCrewId": {
+                        "type": "string"
+                    },
+                    "toCrewId": {
+                        "type": "string"
+                    },
+                    "fromStart": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "toStart": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "reason": {
+                        "type": "string",
+                        "enum": [
+                            "MOVED_AFTER_STORM_PEAK",
+                            "MOVED_BEFORE_STORM_PEAK",
+                            "REASSIGNED_CREW_FATIGUE",
+                            "REASSIGNED_DOSE_BUDGET",
+                            "DROPPED_NON_MANDATORY",
+                            "ADDED_REST_WINDOW",
+                            "OTHER"
+                        ]
+                    },
+                    "explanation": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PlanDto": {
+                "type": "object",
+                "properties": {
+                    "assignments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AssignmentDto"
+                        }
+                    }
+                }
+            },
+            "PlanOptionDto": {
+                "type": "object",
+                "properties": {
+                    "optionId": {
+                        "type": "string"
+                    },
+                    "strategy": {
+                        "type": "string",
+                        "enum": [
+                            "MIN_DOSE",
+                            "MIN_CHANGES",
+                            "BALANCED"
+                        ]
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "plan": {
+                        "$ref": "#/components/schemas/PlanDto"
+                    },
+                    "changes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PlanChangeDto"
+                        }
+                    },
+                    "risk": {
+                        "$ref": "#/components/schemas/RiskDto"
+                    },
+                    "solverStatus": {
+                        "type": "string",
+                        "enum": [
+                            "OPTIMAL",
+                            "FEASIBLE",
+                            "INFEASIBLE",
+                            "UNKNOWN",
+                            "FALLBACK"
+                        ]
+                    }
+                }
+            },
+            "ReplanResponse": {
+                "type": "object",
+                "properties": {
+                    "runId": {
+                        "type": "string"
+                    },
+                    "horizonStart": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "horizonHours": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "currentPlan": {
+                        "$ref": "#/components/schemas/PlanDto"
+                    },
+                    "currentRisk": {
+                        "$ref": "#/components/schemas/RiskDto"
+                    },
+                    "options": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PlanOptionDto"
+                        }
+                    }
+                }
+            },
+            "RiskDto": {
+                "type": "object",
+                "properties": {
+                    "riskScore": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "crewExceedProbability": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "impairedCriticalHours": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "byCrew": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CrewRiskDto"
+                        }
+                    },
+                    "runs": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "AcceptPlanRequest": {
+                "type": "object",
+                "properties": {
+                    "optionId": {
+                        "type": "string",
+                        "minLength": 1
+                    }
+                },
+                "required": [
+                    "optionId"
+                ]
+            },
+            "AcceptPlanResponse": {
+                "type": "object",
+                "properties": {
+                    "runId": {
+                        "type": "string"
+                    },
+                    "optionId": {
+                        "type": "string"
+                    },
+                    "schedule": {
+                        "$ref": "#/components/schemas/PlanDto"
+                    }
+                }
+            },
+            "EnvironmentBatchRequest": {
+                "type": "object",
+                "properties": {
+                    "readings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EnvironmentReadingDto"
+                        },
+                        "minItems": 1
+                    }
+                },
+                "required": [
+                    "readings"
+                ]
+            },
+            "EnvironmentReadingDto": {
+                "type": "object",
+                "properties": {
+                    "module": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "metric": {
+                        "type": "string",
+                        "enum": [
+                            "CO2",
+                            "CABIN_TEMP",
+                            "HUMIDITY"
+                        ]
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "metric",
+                    "module",
+                    "timestamp"
+                ]
+            },
+            "CheckinRequest": {
+                "type": "object",
+                "properties": {
+                    "crewId": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "wellbeing": {
+                        "type": "integer",
+                        "format": "int32",
+                        "maximum": 5,
+                        "minimum": 1
+                    },
+                    "mood": {
+                        "type": "integer",
+                        "format": "int32",
+                        "maximum": 5,
+                        "minimum": 1
+                    },
+                    "stress": {
+                        "type": "integer",
+                        "format": "int32",
+                        "maximum": 5,
+                        "minimum": 1
+                    },
+                    "symptoms": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "reactionMeanMs": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "reactionLapses": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "required": [
+                    "crewId"
+                ]
+            },
+            "AreaStatusDto": {
+                "type": "object",
+                "properties": {
+                    "area": {
+                        "type": "string",
+                        "enum": [
+                            "RADIATION",
+                            "BEHAVIORAL",
+                            "BONE_MUSCLE",
+                            "CARDIOVASCULAR",
+                            "IMMUNE",
+                            "ENVIRONMENT"
+                        ]
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "NORMAL",
+                            "WATCH",
+                            "ACT"
+                        ]
+                    },
+                    "explanation": {
+                        "type": "string"
+                    }
+                }
+            },
+            "BlindSpotDto": {
+                "type": "object",
+                "properties": {
+                    "selfRating": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "objectiveScore": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "gap": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "flagged": {
+                        "type": "boolean"
+                    },
+                    "drivers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/FactorDto"
+                        }
+                    }
+                }
+            },
+            "CheckinResponse": {
+                "type": "object",
+                "properties": {
+                    "checkinId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/CrewStatusResponse"
+                    }
+                }
+            },
+            "CrewStatusResponse": {
+                "type": "object",
+                "properties": {
+                    "crewId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "asOf": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "overall": {
+                        "type": "string",
+                        "enum": [
+                            "NORMAL",
+                            "WATCH",
+                            "ACT"
+                        ]
+                    },
+                    "areas": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AreaStatusDto"
+                        }
+                    },
+                    "blindSpot": {
+                        "$ref": "#/components/schemas/BlindSpotDto"
+                    },
+                    "action": {
+                        "$ref": "#/components/schemas/RecommendedActionDto"
+                    },
+                    "cumulativeDoseMilliSv": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "doseBudgetMilliSv": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "FactorDto": {
+                "type": "object",
+                "properties": {
+                    "metric": {
+                        "type": "string"
+                    },
+                    "deviation": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "text": {
+                        "type": "string"
+                    }
+                }
+            },
+            "RecommendedActionDto": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "NONE",
+                            "REPLAN",
+                            "SLEEP",
+                            "SHELTER",
+                            "EXERCISE",
+                            "CONTACT_MEDIC"
+                        ]
+                    },
+                    "text": {
+                        "type": "string"
+                    }
+                }
+            },
+            "SseEmitter": {
+                "type": "object",
+                "properties": {
+                    "timeout": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "AlertDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "crewId": {
+                        "type": "string"
+                    },
+                    "severity": {
+                        "type": "string",
+                        "enum": [
+                            "INFO",
+                            "WARNING",
+                            "CRITICAL"
+                        ]
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            }
+        }
+    }
+}
