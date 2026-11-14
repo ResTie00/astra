@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -15,5 +17,9 @@ class StatusController {
     @GetMapping("/crew/{id}/status")
     CrewStatusResponse getCrewStatus(@PathVariable("id") String crewId){
         return statusService.statusOf(crewId);
+    }
+    @GetMapping("/crew")
+    List<CrewStatusResponse> crew() {
+        return statusService.statusOfAll();
     }
 }

@@ -192,4 +192,10 @@ public class StatusService {
     public HealthStatus statusFor(String crewId) {
         return statusOf(crewId).overall();
     }
+    public List<CrewStatusResponse> statusOfAll() {
+        return crewRepository.findAll().stream()
+                .sorted(Comparator.comparing(Crew::getId))
+                .map(c -> statusOf(c.getId()))
+                .toList();
+    }
 }

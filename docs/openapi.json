@@ -236,6 +236,46 @@
                 }
             }
         },
+        "/api/space-weather/current": {
+            "get": {
+                "tags": [
+                    "space-weather-controller"
+                ],
+                "operationId": "current",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SpaceWeatherEventRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/schedule": {
+            "get": {
+                "tags": [
+                    "schedule-controller"
+                ],
+                "operationId": "schedule",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PlanDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/debug/blind-spot/{crewId}": {
             "get": {
                 "tags": [
@@ -259,6 +299,29 @@
                             "*/*": {
                                 "schema": {
                                     "$ref": "#/components/schemas/BlindSpotDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/crew": {
+            "get": {
+                "tags": [
+                    "status-controller"
+                ],
+                "operationId": "crew",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CrewStatusResponse"
+                                    }
                                 }
                             }
                         }
