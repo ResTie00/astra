@@ -101,7 +101,7 @@ Swagger UI: `http://localhost:8080/swagger-ui.html` · spec snapshot: [docs/open
 | `GET /api/schedule`, `GET /api/space-weather/current`, `GET /api/alerts` | Current plan, storm, alerts |
 | `GET /api/stream` | Live updates (Server-Sent Events) |
 | `POST /api/telemetry`, `/api/environment`, `/api/space-weather` | Data intake (simulator) |
-
+| `GET /api/crew/{id}/trends` | Daily sleep, reaction time, HRV and self-rating with personal norm bands |
 ## Built with (open source)
 
 **Backend:** Java 21, Spring Boot, Spring Data JPA / Hibernate, Flyway, PostgreSQL, springdoc-openapi, Google OR-Tools (CP-SAT), Jackson, Lombok.
