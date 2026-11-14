@@ -56,7 +56,7 @@ public class MonteCarloRiskEvaluator implements RiskEvaluator {
      * It must give the same ordering as the formula in StubRiskEvaluator, so copy that formula here.
      */
     private static double riskScore(RiskResult r) {
-        return 100.0 * r.probAnyExceed();
+        return Math.min(100.0, 100.0 * r.probAnyExceed() + 5.0 * r.fatiguedEvaHours());
     }
 
     /**

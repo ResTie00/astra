@@ -1,0 +1,611 @@
+{
+    "runId": "run-e46be50d",
+    "horizonStart": "2026-11-14T15:00:00Z",
+    "horizonHours": 72,
+    "currentPlan": {
+        "assignments": [
+            {
+                "taskId": "t03",
+                "taskName": "Life support check",
+                "taskType": "INTERNAL",
+                "crewId": "c1",
+                "crewName": "Alex Rivera",
+                "start": "2026-11-14T19:00:00Z",
+                "end": "2026-11-14T21:00:00Z"
+            },
+            {
+                "taskId": "t04",
+                "taskName": "Medical check-up",
+                "taskType": "INTERNAL",
+                "crewId": "c3",
+                "crewName": "Omar Haddad",
+                "start": "2026-11-14T21:00:00Z",
+                "end": "2026-11-14T22:00:00Z"
+            },
+            {
+                "taskId": "t05",
+                "taskName": "Plant growth experiment",
+                "taskType": "INTERNAL",
+                "crewId": "c4",
+                "crewName": "Lena Novak",
+                "start": "2026-11-14T22:00:00Z",
+                "end": "2026-11-15T01:00:00Z"
+            },
+            {
+                "taskId": "t06",
+                "taskName": "Water recycler maintenance",
+                "taskType": "INTERNAL",
+                "crewId": "c2",
+                "crewName": "Maya Chen",
+                "start": "2026-11-15T00:00:00Z",
+                "end": "2026-11-15T02:00:00Z"
+            },
+            {
+                "taskId": "t07",
+                "taskName": "Navigation update",
+                "taskType": "INTERNAL",
+                "crewId": "c1",
+                "crewName": "Alex Rivera",
+                "start": "2026-11-15T07:00:00Z",
+                "end": "2026-11-15T08:00:00Z"
+            },
+            {
+                "taskId": "t01",
+                "taskName": "Antenna repair (EVA)",
+                "taskType": "EVA",
+                "crewId": "c2",
+                "crewName": "Maya Chen",
+                "start": "2026-11-15T13:00:00Z",
+                "end": "2026-11-15T17:00:00Z"
+            },
+            {
+                "taskId": "t08",
+                "taskName": "Sample analysis",
+                "taskType": "INTERNAL",
+                "crewId": "c4",
+                "crewName": "Lena Novak",
+                "start": "2026-11-15T18:00:00Z",
+                "end": "2026-11-15T20:00:00Z"
+            },
+            {
+                "taskId": "t02",
+                "taskName": "Solar panel inspection (EVA)",
+                "taskType": "EVA",
+                "crewId": "c4",
+                "crewName": "Lena Novak",
+                "start": "2026-11-15T22:00:00Z",
+                "end": "2026-11-16T01:00:00Z"
+            }
+        ]
+    },
+    "currentRisk": {
+        "riskScore": 20.0,
+        "crewExceedProbability": 0.0,
+        "impairedCriticalHours": 4.0,
+        "byCrew": [
+            {
+                "crewId": "c1",
+                "crewName": "Alex Rivera",
+                "doseP50MilliSv": 5.62,
+                "doseP95MilliSv": 5.98,
+                "exceedBudgetProbability": 0.0
+            },
+            {
+                "crewId": "c2",
+                "crewName": "Maya Chen",
+                "doseP50MilliSv": 5.9,
+                "doseP95MilliSv": 6.51,
+                "exceedBudgetProbability": 0.0
+            },
+            {
+                "crewId": "c3",
+                "crewName": "Omar Haddad",
+                "doseP50MilliSv": 5.62,
+                "doseP95MilliSv": 5.98,
+                "exceedBudgetProbability": 0.0
+            },
+            {
+                "crewId": "c4",
+                "crewName": "Lena Novak",
+                "doseP50MilliSv": 5.83,
+                "doseP95MilliSv": 6.38,
+                "exceedBudgetProbability": 0.0
+            }
+        ],
+        "runs": 2000
+    },
+    "options": [
+        {
+            "optionId": "opt-1",
+            "strategy": "BALANCED",
+            "title": "Balanced",
+            "plan": {
+                "assignments": [
+                    {
+                        "taskId": "t01",
+                        "taskName": "Antenna repair (EVA)",
+                        "taskType": "EVA",
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "start": "2026-11-14T18:00:00Z",
+                        "end": "2026-11-14T22:00:00Z"
+                    },
+                    {
+                        "taskId": "t03",
+                        "taskName": "Life support check",
+                        "taskType": "INTERNAL",
+                        "crewId": "c1",
+                        "crewName": "Alex Rivera",
+                        "start": "2026-11-14T19:00:00Z",
+                        "end": "2026-11-14T21:00:00Z"
+                    },
+                    {
+                        "taskId": "t04",
+                        "taskName": "Medical check-up",
+                        "taskType": "INTERNAL",
+                        "crewId": "c3",
+                        "crewName": "Omar Haddad",
+                        "start": "2026-11-14T21:00:00Z",
+                        "end": "2026-11-14T22:00:00Z"
+                    },
+                    {
+                        "taskId": "t05",
+                        "taskName": "Plant growth experiment",
+                        "taskType": "INTERNAL",
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "start": "2026-11-14T22:00:00Z",
+                        "end": "2026-11-15T01:00:00Z"
+                    },
+                    {
+                        "taskId": "t06",
+                        "taskName": "Water recycler maintenance",
+                        "taskType": "INTERNAL",
+                        "crewId": "c2",
+                        "crewName": "Maya Chen",
+                        "start": "2026-11-15T00:00:00Z",
+                        "end": "2026-11-15T02:00:00Z"
+                    },
+                    {
+                        "taskId": "t07",
+                        "taskName": "Navigation update",
+                        "taskType": "INTERNAL",
+                        "crewId": "c1",
+                        "crewName": "Alex Rivera",
+                        "start": "2026-11-15T07:00:00Z",
+                        "end": "2026-11-15T08:00:00Z"
+                    },
+                    {
+                        "taskId": "t08",
+                        "taskName": "Sample analysis",
+                        "taskType": "INTERNAL",
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "start": "2026-11-15T18:00:00Z",
+                        "end": "2026-11-15T20:00:00Z"
+                    },
+                    {
+                        "taskId": "t02",
+                        "taskName": "Solar panel inspection (EVA)",
+                        "taskType": "EVA",
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "start": "2026-11-16T05:00:00Z",
+                        "end": "2026-11-16T08:00:00Z"
+                    }
+                ]
+            },
+            "changes": [
+                {
+                    "taskId": "t01",
+                    "taskName": "Antenna repair (EVA)",
+                    "type": "MOVED_AND_REASSIGNED",
+                    "fromCrewId": "c2",
+                    "toCrewId": "c4",
+                    "fromStart": "2026-11-15T13:00:00Z",
+                    "toStart": "2026-11-14T18:00:00Z",
+                    "reason": "REASSIGNED_CREW_FATIGUE",
+                    "explanation": "Antenna repair (EVA) given to Lena Novak at Nov 14, 18:00 UTC: Maya Chen shows signs of fatigue"
+                },
+                {
+                    "taskId": "t02",
+                    "taskName": "Solar panel inspection (EVA)",
+                    "type": "MOVED",
+                    "fromCrewId": "c4",
+                    "toCrewId": "c4",
+                    "fromStart": "2026-11-15T22:00:00Z",
+                    "toStart": "2026-11-16T05:00:00Z",
+                    "reason": "MOVED_AFTER_STORM_PEAK",
+                    "explanation": "Solar panel inspection (EVA) moved to Nov 16, 05:00 UTC: after the storm peak"
+                }
+            ],
+            "risk": {
+                "riskScore": 0.0,
+                "crewExceedProbability": 0.0,
+                "impairedCriticalHours": 0.0,
+                "byCrew": [
+                    {
+                        "crewId": "c1",
+                        "crewName": "Alex Rivera",
+                        "doseP50MilliSv": 5.62,
+                        "doseP95MilliSv": 5.98,
+                        "exceedBudgetProbability": 0.0
+                    },
+                    {
+                        "crewId": "c2",
+                        "crewName": "Maya Chen",
+                        "doseP50MilliSv": 5.62,
+                        "doseP95MilliSv": 5.98,
+                        "exceedBudgetProbability": 0.0
+                    },
+                    {
+                        "crewId": "c3",
+                        "crewName": "Omar Haddad",
+                        "doseP50MilliSv": 5.62,
+                        "doseP95MilliSv": 5.98,
+                        "exceedBudgetProbability": 0.0
+                    },
+                    {
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "doseP50MilliSv": 5.89,
+                        "doseP95MilliSv": 6.32,
+                        "exceedBudgetProbability": 0.0
+                    }
+                ],
+                "runs": 2000
+            },
+            "solverStatus": "OPTIMAL"
+        },
+        {
+            "optionId": "opt-2",
+            "strategy": "MIN_DOSE",
+            "title": "Lowest dose",
+            "plan": {
+                "assignments": [
+                    {
+                        "taskId": "t01",
+                        "taskName": "Antenna repair (EVA)",
+                        "taskType": "EVA",
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "start": "2026-11-14T18:00:00Z",
+                        "end": "2026-11-14T22:00:00Z"
+                    },
+                    {
+                        "taskId": "t02",
+                        "taskName": "Solar panel inspection (EVA)",
+                        "taskType": "EVA",
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "start": "2026-11-16T05:00:00Z",
+                        "end": "2026-11-16T08:00:00Z"
+                    },
+                    {
+                        "taskId": "t04",
+                        "taskName": "Medical check-up",
+                        "taskType": "INTERNAL",
+                        "crewId": "c3",
+                        "crewName": "Omar Haddad",
+                        "start": "2026-11-17T04:00:00Z",
+                        "end": "2026-11-17T05:00:00Z"
+                    },
+                    {
+                        "taskId": "t05",
+                        "taskName": "Plant growth experiment",
+                        "taskType": "INTERNAL",
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "start": "2026-11-17T04:00:00Z",
+                        "end": "2026-11-17T07:00:00Z"
+                    },
+                    {
+                        "taskId": "t07",
+                        "taskName": "Navigation update",
+                        "taskType": "INTERNAL",
+                        "crewId": "c1",
+                        "crewName": "Alex Rivera",
+                        "start": "2026-11-17T04:00:00Z",
+                        "end": "2026-11-17T05:00:00Z"
+                    },
+                    {
+                        "taskId": "t06",
+                        "taskName": "Water recycler maintenance",
+                        "taskType": "INTERNAL",
+                        "crewId": "c2",
+                        "crewName": "Maya Chen",
+                        "start": "2026-11-17T06:00:00Z",
+                        "end": "2026-11-17T08:00:00Z"
+                    },
+                    {
+                        "taskId": "t08",
+                        "taskName": "Sample analysis",
+                        "taskType": "INTERNAL",
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "start": "2026-11-17T07:00:00Z",
+                        "end": "2026-11-17T09:00:00Z"
+                    },
+                    {
+                        "taskId": "t03",
+                        "taskName": "Life support check",
+                        "taskType": "INTERNAL",
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "start": "2026-11-17T11:00:00Z",
+                        "end": "2026-11-17T13:00:00Z"
+                    }
+                ]
+            },
+            "changes": [
+                {
+                    "taskId": "t01",
+                    "taskName": "Antenna repair (EVA)",
+                    "type": "MOVED_AND_REASSIGNED",
+                    "fromCrewId": "c2",
+                    "toCrewId": "c4",
+                    "fromStart": "2026-11-15T13:00:00Z",
+                    "toStart": "2026-11-14T18:00:00Z",
+                    "reason": "REASSIGNED_CREW_FATIGUE",
+                    "explanation": "Antenna repair (EVA) given to Lena Novak at Nov 14, 18:00 UTC: Maya Chen shows signs of fatigue"
+                },
+                {
+                    "taskId": "t02",
+                    "taskName": "Solar panel inspection (EVA)",
+                    "type": "MOVED",
+                    "fromCrewId": "c4",
+                    "toCrewId": "c4",
+                    "fromStart": "2026-11-15T22:00:00Z",
+                    "toStart": "2026-11-16T05:00:00Z",
+                    "reason": "MOVED_AFTER_STORM_PEAK",
+                    "explanation": "Solar panel inspection (EVA) moved to Nov 16, 05:00 UTC: after the storm peak"
+                },
+                {
+                    "taskId": "t03",
+                    "taskName": "Life support check",
+                    "type": "MOVED_AND_REASSIGNED",
+                    "fromCrewId": "c1",
+                    "toCrewId": "c4",
+                    "fromStart": "2026-11-14T19:00:00Z",
+                    "toStart": "2026-11-17T11:00:00Z",
+                    "reason": "OTHER",
+                    "explanation": "Life support check given to Lena Novak at Nov 17, 11:00 UTC"
+                },
+                {
+                    "taskId": "t04",
+                    "taskName": "Medical check-up",
+                    "type": "MOVED",
+                    "fromCrewId": "c3",
+                    "toCrewId": "c3",
+                    "fromStart": "2026-11-14T21:00:00Z",
+                    "toStart": "2026-11-17T04:00:00Z",
+                    "reason": "OTHER",
+                    "explanation": "Medical check-up moved to Nov 17, 04:00 UTC"
+                },
+                {
+                    "taskId": "t05",
+                    "taskName": "Plant growth experiment",
+                    "type": "MOVED",
+                    "fromCrewId": "c4",
+                    "toCrewId": "c4",
+                    "fromStart": "2026-11-14T22:00:00Z",
+                    "toStart": "2026-11-17T04:00:00Z",
+                    "reason": "OTHER",
+                    "explanation": "Plant growth experiment moved to Nov 17, 04:00 UTC"
+                },
+                {
+                    "taskId": "t06",
+                    "taskName": "Water recycler maintenance",
+                    "type": "MOVED",
+                    "fromCrewId": "c2",
+                    "toCrewId": "c2",
+                    "fromStart": "2026-11-15T00:00:00Z",
+                    "toStart": "2026-11-17T06:00:00Z",
+                    "reason": "OTHER",
+                    "explanation": "Water recycler maintenance moved to Nov 17, 06:00 UTC"
+                },
+                {
+                    "taskId": "t07",
+                    "taskName": "Navigation update",
+                    "type": "MOVED",
+                    "fromCrewId": "c1",
+                    "toCrewId": "c1",
+                    "fromStart": "2026-11-15T07:00:00Z",
+                    "toStart": "2026-11-17T04:00:00Z",
+                    "reason": "OTHER",
+                    "explanation": "Navigation update moved to Nov 17, 04:00 UTC"
+                },
+                {
+                    "taskId": "t08",
+                    "taskName": "Sample analysis",
+                    "type": "MOVED",
+                    "fromCrewId": "c4",
+                    "toCrewId": "c4",
+                    "fromStart": "2026-11-15T18:00:00Z",
+                    "toStart": "2026-11-17T07:00:00Z",
+                    "reason": "OTHER",
+                    "explanation": "Sample analysis moved to Nov 17, 07:00 UTC"
+                }
+            ],
+            "risk": {
+                "riskScore": 0.0,
+                "crewExceedProbability": 0.0,
+                "impairedCriticalHours": 0.0,
+                "byCrew": [
+                    {
+                        "crewId": "c1",
+                        "crewName": "Alex Rivera",
+                        "doseP50MilliSv": 5.62,
+                        "doseP95MilliSv": 5.98,
+                        "exceedBudgetProbability": 0.0
+                    },
+                    {
+                        "crewId": "c2",
+                        "crewName": "Maya Chen",
+                        "doseP50MilliSv": 5.62,
+                        "doseP95MilliSv": 5.98,
+                        "exceedBudgetProbability": 0.0
+                    },
+                    {
+                        "crewId": "c3",
+                        "crewName": "Omar Haddad",
+                        "doseP50MilliSv": 5.62,
+                        "doseP95MilliSv": 5.98,
+                        "exceedBudgetProbability": 0.0
+                    },
+                    {
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "doseP50MilliSv": 5.89,
+                        "doseP95MilliSv": 6.32,
+                        "exceedBudgetProbability": 0.0
+                    }
+                ],
+                "runs": 2000
+            },
+            "solverStatus": "OPTIMAL"
+        },
+        {
+            "optionId": "opt-3",
+            "strategy": "MIN_CHANGES",
+            "title": "Fewest changes",
+            "plan": {
+                "assignments": [
+                    {
+                        "taskId": "t01",
+                        "taskName": "Antenna repair (EVA)",
+                        "taskType": "EVA",
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "start": "2026-11-14T18:00:00Z",
+                        "end": "2026-11-14T22:00:00Z"
+                    },
+                    {
+                        "taskId": "t03",
+                        "taskName": "Life support check",
+                        "taskType": "INTERNAL",
+                        "crewId": "c1",
+                        "crewName": "Alex Rivera",
+                        "start": "2026-11-14T19:00:00Z",
+                        "end": "2026-11-14T21:00:00Z"
+                    },
+                    {
+                        "taskId": "t04",
+                        "taskName": "Medical check-up",
+                        "taskType": "INTERNAL",
+                        "crewId": "c3",
+                        "crewName": "Omar Haddad",
+                        "start": "2026-11-14T21:00:00Z",
+                        "end": "2026-11-14T22:00:00Z"
+                    },
+                    {
+                        "taskId": "t05",
+                        "taskName": "Plant growth experiment",
+                        "taskType": "INTERNAL",
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "start": "2026-11-14T22:00:00Z",
+                        "end": "2026-11-15T01:00:00Z"
+                    },
+                    {
+                        "taskId": "t06",
+                        "taskName": "Water recycler maintenance",
+                        "taskType": "INTERNAL",
+                        "crewId": "c2",
+                        "crewName": "Maya Chen",
+                        "start": "2026-11-15T00:00:00Z",
+                        "end": "2026-11-15T02:00:00Z"
+                    },
+                    {
+                        "taskId": "t07",
+                        "taskName": "Navigation update",
+                        "taskType": "INTERNAL",
+                        "crewId": "c1",
+                        "crewName": "Alex Rivera",
+                        "start": "2026-11-15T07:00:00Z",
+                        "end": "2026-11-15T08:00:00Z"
+                    },
+                    {
+                        "taskId": "t08",
+                        "taskName": "Sample analysis",
+                        "taskType": "INTERNAL",
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "start": "2026-11-15T18:00:00Z",
+                        "end": "2026-11-15T20:00:00Z"
+                    },
+                    {
+                        "taskId": "t02",
+                        "taskName": "Solar panel inspection (EVA)",
+                        "taskType": "EVA",
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "start": "2026-11-16T05:00:00Z",
+                        "end": "2026-11-16T08:00:00Z"
+                    }
+                ]
+            },
+            "changes": [
+                {
+                    "taskId": "t01",
+                    "taskName": "Antenna repair (EVA)",
+                    "type": "MOVED_AND_REASSIGNED",
+                    "fromCrewId": "c2",
+                    "toCrewId": "c4",
+                    "fromStart": "2026-11-15T13:00:00Z",
+                    "toStart": "2026-11-14T18:00:00Z",
+                    "reason": "REASSIGNED_CREW_FATIGUE",
+                    "explanation": "Antenna repair (EVA) given to Lena Novak at Nov 14, 18:00 UTC: Maya Chen shows signs of fatigue"
+                },
+                {
+                    "taskId": "t02",
+                    "taskName": "Solar panel inspection (EVA)",
+                    "type": "MOVED",
+                    "fromCrewId": "c4",
+                    "toCrewId": "c4",
+                    "fromStart": "2026-11-15T22:00:00Z",
+                    "toStart": "2026-11-16T05:00:00Z",
+                    "reason": "MOVED_AFTER_STORM_PEAK",
+                    "explanation": "Solar panel inspection (EVA) moved to Nov 16, 05:00 UTC: after the storm peak"
+                }
+            ],
+            "risk": {
+                "riskScore": 0.0,
+                "crewExceedProbability": 0.0,
+                "impairedCriticalHours": 0.0,
+                "byCrew": [
+                    {
+                        "crewId": "c1",
+                        "crewName": "Alex Rivera",
+                        "doseP50MilliSv": 5.62,
+                        "doseP95MilliSv": 5.98,
+                        "exceedBudgetProbability": 0.0
+                    },
+                    {
+                        "crewId": "c2",
+                        "crewName": "Maya Chen",
+                        "doseP50MilliSv": 5.62,
+                        "doseP95MilliSv": 5.98,
+                        "exceedBudgetProbability": 0.0
+                    },
+                    {
+                        "crewId": "c3",
+                        "crewName": "Omar Haddad",
+                        "doseP50MilliSv": 5.62,
+                        "doseP95MilliSv": 5.98,
+                        "exceedBudgetProbability": 0.0
+                    },
+                    {
+                        "crewId": "c4",
+                        "crewName": "Lena Novak",
+                        "doseP50MilliSv": 5.89,
+                        "doseP95MilliSv": 6.32,
+                        "exceedBudgetProbability": 0.0
+                    }
+                ],
+                "runs": 2000
+            },
+            "solverStatus": "OPTIMAL"
+        }
+    ]
+}

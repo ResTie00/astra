@@ -3,6 +3,7 @@ package kg.astra.replan;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.Instant;
+import java.util.Collection;
 import java.util.List;
 
 public interface ScheduleEntryRepository extends JpaRepository<ScheduleEntry, Long> {
@@ -11,4 +12,5 @@ public interface ScheduleEntryRepository extends JpaRepository<ScheduleEntry, Lo
     List<ScheduleEntry> findByStartAtLessThanAndEndAtGreaterThanOrderByStartAt(Instant to, Instant from);
 
     List<ScheduleEntry> findByCrewIdOrderByStartAt(String crewId);
+    void deleteByTaskIdIn(Collection<String> taskIds);
 }

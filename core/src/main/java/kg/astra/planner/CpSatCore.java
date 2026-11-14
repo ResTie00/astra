@@ -49,9 +49,9 @@ public final class CpSatCore {
 
     private static Weights weights(PlanStrategy strategy) {
         return switch (strategy) {
-            case MIN_CHANGES -> new Weights(100, 0, 1, 10);
-            case MIN_DOSE -> new Weights(0, 100, 1, 10);
-            case BALANCED -> new Weights(10, 1, 1, 10);
+            case MIN_CHANGES -> new Weights(100, 0, 0, 10);
+            case MIN_DOSE -> new Weights(0, 100, 0, 10);
+            case BALANCED -> new Weights(10, 1, 0, 10);
         };
     }
 
@@ -122,7 +122,7 @@ public final class CpSatCore {
             }
             IntVar taskDose = model.newIntVar(0, maxDose, "dose_" + task.id());
             model.addElement(start[t], doseByStart, taskDose);
-            if (w.dose() > 0) objective.addTerm(taskDose, w.dose());
+            if (w.dose() > 0 && task.type() == TaskType.EVA) objective.addTerm(taskDose, w.dose());
 
             List<Literal> choices = new ArrayList<>();
             for (int a = 0; a < nA; a++) {
@@ -140,9 +140,10 @@ public final class CpSatCore {
                     model.addEquality(assigned[t][a], 0);
                 }
 
-                // soft penalty: work given to a WATCH person
-                if (person.status() == HealthStatus.WATCH) {
-                    objective.addTerm(assigned[t][a], w.watch() * dur);
+                // soft penalty: work given to a person who is not NORMAL; ACT costs more than WATCH
+                if (person.status() != HealthStatus.NORMAL) {
+                    long factor = person.status() == HealthStatus.ACT ? 3 : 1;
+                    objective.addTerm(assigned[t][a], w.watch() * dur * factor);
                 }
 
                 // dose is counted for this person only if he does this task
