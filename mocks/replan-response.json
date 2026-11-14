@@ -1,0 +1,76 @@
+{
+  "runId": "run-0007",
+  "horizonStart": "2026-11-14T06:00:00Z",
+  "horizonHours": 72,
+  "currentPlan": {
+    "assignments": [
+      { "taskId": "t01", "taskName": "Antenna repair (EVA)", "taskType": "EVA", "crewId": "c2", "crewName": "Maya Chen", "start": "2026-11-15T04:00:00Z", "end": "2026-11-15T08:00:00Z" },
+      { "taskId": "t02", "taskName": "Life support check", "taskType": "INTERNAL", "crewId": "c1", "crewName": "Alex Rivera", "start": "2026-11-14T10:00:00Z", "end": "2026-11-14T12:00:00Z" },
+      { "taskId": "t03", "taskName": "Exercise", "taskType": "EXERCISE", "crewId": "c2", "crewName": "Maya Chen", "start": "2026-11-14T15:00:00Z", "end": "2026-11-14T17:00:00Z" }
+    ]
+  },
+  "currentRisk": {
+    "riskScore": 38.0,
+    "crewExceedProbability": 0.18,
+    "impairedCriticalHours": 4.0,
+    "runs": 2000,
+    "byCrew": [
+      { "crewId": "c1", "crewName": "Alex Rivera", "doseP50MilliSv": 5.4, "doseP95MilliSv": 6.1, "exceedBudgetProbability": 0.0 },
+      { "crewId": "c2", "crewName": "Maya Chen", "doseP50MilliSv": 14.9, "doseP95MilliSv": 21.3, "exceedBudgetProbability": 0.18 }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "opt-1",
+      "strategy": "MIN_DOSE",
+      "title": "Lowest dose",
+      "plan": {
+        "assignments": [
+          { "taskId": "t01", "taskName": "Antenna repair (EVA)", "taskType": "EVA", "crewId": "c1", "crewName": "Alex Rivera", "start": "2026-11-16T10:00:00Z", "end": "2026-11-16T14:00:00Z" },
+          { "taskId": "t02", "taskName": "Life support check", "taskType": "INTERNAL", "crewId": "c1", "crewName": "Alex Rivera", "start": "2026-11-14T10:00:00Z", "end": "2026-11-14T12:00:00Z" },
+          { "taskId": "t03", "taskName": "Exercise", "taskType": "EXERCISE", "crewId": "c2", "crewName": "Maya Chen", "start": "2026-11-14T15:00:00Z", "end": "2026-11-14T17:00:00Z" }
+        ]
+      },
+      "changes": [
+        { "taskId": "t01", "taskName": "Antenna repair (EVA)", "type": "MOVED_AND_REASSIGNED", "fromCrewId": "c2", "toCrewId": "c1", "fromStart": "2026-11-15T04:00:00Z", "toStart": "2026-11-16T10:00:00Z", "reason": "MOVED_AFTER_STORM_PEAK", "explanation": "EVA moved after the storm peak and given to Alex: Maya shows signs of fatigue" }
+      ],
+      "risk": {
+        "riskScore": 3.0,
+        "crewExceedProbability": 0.03,
+        "impairedCriticalHours": 0.0,
+        "runs": 2000,
+        "byCrew": [
+          { "crewId": "c1", "crewName": "Alex Rivera", "doseP50MilliSv": 6.0, "doseP95MilliSv": 7.2, "exceedBudgetProbability": 0.0 },
+          { "crewId": "c2", "crewName": "Maya Chen", "doseP50MilliSv": 4.3, "doseP95MilliSv": 5.0, "exceedBudgetProbability": 0.03 }
+        ]
+      },
+      "solverStatus": "OPTIMAL"
+    },
+    {
+      "optionId": "opt-2",
+      "strategy": "MIN_CHANGES",
+      "title": "Fewest changes",
+      "plan": {
+        "assignments": [
+          { "taskId": "t01", "taskName": "Antenna repair (EVA)", "taskType": "EVA", "crewId": "c1", "crewName": "Alex Rivera", "start": "2026-11-15T04:00:00Z", "end": "2026-11-15T08:00:00Z" },
+          { "taskId": "t02", "taskName": "Life support check", "taskType": "INTERNAL", "crewId": "c1", "crewName": "Alex Rivera", "start": "2026-11-14T10:00:00Z", "end": "2026-11-14T12:00:00Z" },
+          { "taskId": "t03", "taskName": "Exercise", "taskType": "EXERCISE", "crewId": "c2", "crewName": "Maya Chen", "start": "2026-11-14T15:00:00Z", "end": "2026-11-14T17:00:00Z" }
+        ]
+      },
+      "changes": [
+        { "taskId": "t01", "taskName": "Antenna repair (EVA)", "type": "REASSIGNED", "fromCrewId": "c2", "toCrewId": "c1", "fromStart": "2026-11-15T04:00:00Z", "toStart": "2026-11-15T04:00:00Z", "reason": "REASSIGNED_CREW_FATIGUE", "explanation": "EVA given to Alex: Maya shows signs of fatigue" }
+      ],
+      "risk": {
+        "riskScore": 21.0,
+        "crewExceedProbability": 0.11,
+        "impairedCriticalHours": 0.0,
+        "runs": 2000,
+        "byCrew": [
+          { "crewId": "c1", "crewName": "Alex Rivera", "doseP50MilliSv": 13.8, "doseP95MilliSv": 19.6, "exceedBudgetProbability": 0.11 },
+          { "crewId": "c2", "crewName": "Maya Chen", "doseP50MilliSv": 4.3, "doseP95MilliSv": 5.0, "exceedBudgetProbability": 0.0 }
+        ]
+      },
+      "solverStatus": "OPTIMAL"
+    }
+  ]
+}

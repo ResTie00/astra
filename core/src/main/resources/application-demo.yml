@@ -1,0 +1,4 @@
+# Demo profile: fixed seed, data loader on. Run with SPRING_PROFILES_ACTIVE=demo
+astra:
+  demo:
+    load-data: true

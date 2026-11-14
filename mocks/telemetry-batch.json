@@ -1,0 +1,10 @@
+{
+  "readings": [
+    { "crewId": "c1", "timestamp": "2026-11-14T06:00:00Z", "metric": "HEART_RATE", "value": 64.0 },
+    { "crewId": "c1", "timestamp": "2026-11-14T06:00:00Z", "metric": "HRV_RMSSD", "value": 52.0 },
+    { "crewId": "c1", "timestamp": "2026-11-14T06:00:00Z", "metric": "SPO2", "value": 98.0 },
+    { "crewId": "c1", "timestamp": "2026-11-14T06:00:00Z", "metric": "BODY_TEMP", "value": 36.6 },
+    { "crewId": "c1", "timestamp": "2026-11-14T06:00:00Z", "metric": "DOSE_RATE", "value": 74.0 },
+    { "crewId": "c1", "timestamp": "2026-11-14T06:00:00Z", "metric": "SLEEP_HOURS", "value": 7.1 }
+  ]
+}

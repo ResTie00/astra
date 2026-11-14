@@ -1,0 +1,12 @@
+[
+  { "type": "TELEMETRY", "timestamp": "2026-11-14T06:00:01Z",
+    "payload": { "crewId": "c2", "timestamp": "2026-11-14T06:00:00Z", "metric": "HEART_RATE", "value": 78.0 } },
+  { "type": "ALERT", "timestamp": "2026-11-14T06:05:00Z",
+    "payload": { "id": 12, "crewId": null, "severity": "CRITICAL", "type": "SPACE_WEATHER", "message": "Solar particle event expected in ~20 h. EVA during the peak is not recommended.", "createdAt": "2026-11-14T06:05:00Z" } },
+  { "type": "SPACE_WEATHER", "timestamp": "2026-11-14T06:05:00Z",
+    "payload": { "type": "SPE", "onset": "2026-11-15T02:00:00Z", "peak": "2026-11-15T08:00:00Z", "peakProtonFluxPfu": 1000.0, "durationHours": 18 } },
+  { "type": "STATUS_CHANGED", "timestamp": "2026-11-14T06:06:00Z",
+    "payload": "<same shape as crew-status.json>" },
+  { "type": "REPLAN_READY", "timestamp": "2026-11-14T06:06:03Z",
+    "payload": "<same shape as replan-response.json>" }
+]

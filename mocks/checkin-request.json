@@ -1,0 +1,10 @@
+{
+  "crewId": "c2",
+  "timestamp": null,
+  "wellbeing": 4,
+  "mood": 4,
+  "stress": 2,
+  "symptoms": [],
+  "reactionMeanMs": 342,
+  "reactionLapses": 3
+}

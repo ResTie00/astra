@@ -1,0 +1,28 @@
+{
+  "crewId": "c2",
+  "name": "Maya Chen",
+  "asOf": "2026-11-14T06:00:00Z",
+  "overall": "ACT",
+  "areas": [
+    { "area": "RADIATION", "status": "WATCH", "explanation": "71% of mission dose budget used" },
+    { "area": "BEHAVIORAL", "status": "ACT", "explanation": "Sleep below your norm 3 nights in a row, reaction time +18%" },
+    { "area": "BONE_MUSCLE", "status": "NORMAL", "explanation": "Exercise plan on track" },
+    { "area": "CARDIOVASCULAR", "status": "WATCH", "explanation": "HRV below your norm for 2 days" },
+    { "area": "IMMUNE", "status": "NORMAL", "explanation": "Temperature within your norm" },
+    { "area": "ENVIRONMENT", "status": "NORMAL", "explanation": "CO2 2,900 ppm in module B" }
+  ],
+  "blindSpot": {
+    "selfRating": 4,
+    "objectiveScore": 2.3,
+    "gap": 1.7,
+    "flagged": true,
+    "drivers": [
+      { "metric": "SLEEP_HOURS", "deviation": -2.4, "text": "Sleep 1.5 h below your norm for 3 nights" },
+      { "metric": "REACTION_TIME", "deviation": 2.1, "text": "Reaction time 18% slower than your norm" },
+      { "metric": "HRV_RMSSD", "deviation": -1.6, "text": "HRV below your norm since day 38" }
+    ]
+  },
+  "action": { "type": "REPLAN", "text": "Move tomorrow's EVA by one day and add a sleep window" },
+  "cumulativeDoseMilliSv": 42.6,
+  "doseBudgetMilliSv": 60.0
+}
