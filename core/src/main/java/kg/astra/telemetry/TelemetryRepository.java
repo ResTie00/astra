@@ -25,4 +25,6 @@ public interface TelemetryRepository extends JpaRepository<TelemetryReading, Lon
             ORDER BY metric, recorded_at DESC
             """, nativeQuery = true)
     List<TelemetryReading> findLatestPerMetric(@Param("crewId") String crewId);
+
+    List<TelemetryReading> findAllByCrewIdAndMetricAndRecordedAtBetween(String crewId, Metric metric, Instant from, Instant to);
 }

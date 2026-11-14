@@ -11,4 +11,6 @@ public interface CheckinRepository extends JpaRepository<Checkin, Long> {
     Optional<Checkin> findTopByCrewIdOrderByRecordedAtDesc(String crewId);
 
     List<Checkin> findByCrewIdAndRecordedAtAfterOrderByRecordedAt(String crewId, Instant after);
+
+    List<Checkin> findByCrewIdAndRecordedAtBetweenOrderByRecordedAt(String crewId, Instant before, Instant after);
 }
