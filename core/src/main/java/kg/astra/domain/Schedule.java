@@ -3,7 +3,7 @@ package kg.astra.domain;
 import java.util.List;
 import java.util.Optional;
 
-/** A full schedule: a list of assignments. */
+//A full schedule: a list of assignments
 public record Schedule(List<Assignment> assignments) {
 
     public Schedule {

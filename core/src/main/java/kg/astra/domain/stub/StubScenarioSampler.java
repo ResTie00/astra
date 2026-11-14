@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.random.RandomGenerator;
 import java.util.random.RandomGeneratorFactory;
 
-/** Simple reproducible sampler around the forecast. Arsen replaces the distributions. */
+// Simple reproducible sampler around the forecast. Arsen replaces the distributions
 public class StubScenarioSampler implements ScenarioSampler {
 
     @Override

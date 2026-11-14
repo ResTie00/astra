@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @RestController
 @RequestMapping("/api")
+// one long-lived connection per open UI: all live updates (telemetry, alerts, status, replan) go through it
 public class StreamController {
 
     private final SseHub hub;

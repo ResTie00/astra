@@ -3,12 +3,12 @@ package kg.astra.domain;
 import java.util.Objects;
 import java.util.Set;
 
-/**
- * Crew member as the solver and risk model see them.
- *
- * @param remainingDoseBudgetMicroSv dose still allowed for this mission, µSv
- * @param status                     health status computed by Core
- */
+
+//Crew member as the solver and risk model see them.
+
+//remainingDoseBudgetMicroSv is a dose still allowed for this mission, µSv
+//status is a health status computed by Core
+
 public record CrewMember(String id, String name, Set<String> skills,
                          long remainingDoseBudgetMicroSv, HealthStatus status) {
 

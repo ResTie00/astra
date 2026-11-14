@@ -1,11 +1,10 @@
 package kg.astra.domain;
 
-/**
- * One sampled solar particle event for Monte Carlo.
- *
- * @param peakFluxPfu        proton flux at peak, pfu
- * @param shelterAttenuation fraction of storm dose that still gets through the shelter (0..1)
- */
+//One sampled solar particle event for Monte Carlo.
+
+//peakFluxPfu is a proton flux at peak, pfu
+//shelterAttenuation is fraction of storm dose that still gets through the shelter (0..1)
+
 public record SpeScenario(double peakFluxPfu, int onsetSlot, int durationSlots, double shelterAttenuation) {
 
     public boolean covers(int slot) {

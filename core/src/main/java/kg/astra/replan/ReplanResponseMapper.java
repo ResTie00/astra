@@ -23,10 +23,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * Domain result -> API response. The mirror of MissionStateAssembler:
- * slots -> dates, µSv -> mSv, reason codes -> human text. Uses the SAME horizonStart.
- */
+
+//Domain result -> API response. The mirror of MissionStateAssembler:
+//slots -> dates, µSv -> mSv, reason codes -> human text. Uses the SAME horizonStart.
+
 @Component
 class ReplanResponseMapper {
 

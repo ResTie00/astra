@@ -18,7 +18,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-/** Straightforward Monte Carlo, sequential. Good enough to run end to end; Arsen owns the real one. */
+// simple sequential Monte Carlo, the first working version.
+// the app now uses MonteCarloRiskEvaluator; this one stays as a backup we can switch to in DomainConfig
 public class StubRiskEvaluator implements RiskEvaluator {
 
     private final DoseModel doseModel;
@@ -34,16 +35,19 @@ public class StubRiskEvaluator implements RiskEvaluator {
         int runs = Math.max(1, scenarios.size());
 
         List<CrewRisk> byCrew = new ArrayList<>();
+        // per scenario: did at least one person go over budget
         boolean[] anyExceeded = new boolean[runs];
         double impairedEvaHours = 0;
 
         for (CrewMember member : state.crew()) {
             TaskType[] timeline = timelineOf(member.id(), plan, tasks, slots);
 
+            // EVA hours done by someone who is not fully fit. this doesn't depend on the storm
             if (member.status() != HealthStatus.NORMAL) {
                 for (TaskType t : timeline) if (t == TaskType.EVA) impairedEvaHours++;
             }
 
+            // total dose of this person in every scenario
             double[] doses = new double[runs];
             int exceeded = 0;
             for (int r = 0; r < scenarios.size(); r++) {
@@ -63,11 +67,12 @@ public class StubRiskEvaluator implements RiskEvaluator {
         int crewExceeded = 0;
         for (boolean b : anyExceeded) if (b) crewExceeded++;
         double crewExceedProbability = (double) crewExceeded / runs;
+        // one number to sort plans: chance to go over budget + 5 points for every impaired EVA hour
         double riskScore = Math.min(100, crewExceedProbability * 100 + impairedEvaHours * 5);
         return new RiskReport(byCrew, crewExceedProbability, impairedEvaHours, riskScore, scenarios.size());
     }
 
-    /** What the person is doing in each slot; free slots count as INTERNAL. */
+    // what the person does in each hour. a free hour counts as INTERNAL, they're inside the ship anyway
     private static TaskType[] timelineOf(String crewId, Schedule plan, Map<String, Task> tasks, int slots) {
         TaskType[] timeline = new TaskType[slots];
         Arrays.fill(timeline, TaskType.INTERNAL);
@@ -80,6 +85,7 @@ public class StubRiskEvaluator implements RiskEvaluator {
         return timeline;
     }
 
+    // value below which p of the scenarios fall. the array must be sorted
     private static double percentile(double[] sorted, double p) {
         if (sorted.length == 0) return 0;
         int idx = (int) Math.ceil(p * sorted.length) - 1;

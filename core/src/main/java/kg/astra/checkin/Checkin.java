@@ -14,7 +14,7 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 
-/** Self-report + optional reaction test result. */
+//Self-report + optional reaction test result
 @Entity
 @Table(name = "checkin")
 @Getter
@@ -40,7 +40,7 @@ public class Checkin {
     @Column(nullable = false)
     private int stress;
 
-    /** Comma-separated in the DB. */
+    //Comma-separated in the DB
     @Column(nullable = false)
     private String symptoms;
 
@@ -50,7 +50,7 @@ public class Checkin {
     @Column(name = "reaction_lapses")
     private Integer reactionLapses;
 
-    /** Builds an entity from the API request. Null timestamp = now (UI); simulator sends past times. */
+    //Builds an entity from the API request. Null timestamp = now (UI); simulator sends past times
     public static Checkin from(CheckinRequest r) {
         Checkin c = new Checkin();
         c.crewId = r.crewId();

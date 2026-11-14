@@ -17,12 +17,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Background check of every crew member, so problems surface without anyone opening a screen.
- * - an area in ACT raises an alert (WATCH does not: a storm puts everyone in WATCH, and that is one
- *   mission-wide storm alert, not four personal ones);
- * - when someone's overall status changes, the new status is pushed as STATUS_CHANGED.
- */
+// checks every crew member once a minute, so problems show up even if nobody opens the screen
+// only ACT raises an alert. WATCH doesn't, because a storm puts everyone in WATCH
+// and that's already one storm alert for the whole mission
+// if someone's overall status changes, we send the new one to the UI
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -65,6 +63,7 @@ class HealthMonitor {
         }
 
         HealthStatus previous = lastOverall.put(crew.getId(), status.overall());
+        // only send when the overall state actually changes, or the UI will keep refreshing on every poll
         if (previous != status.overall()) {
             sseHub.publish(StreamEvent.of(StreamEventType.STATUS_CHANGED, status));
         }

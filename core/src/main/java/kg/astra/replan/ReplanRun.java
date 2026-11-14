@@ -12,7 +12,7 @@ import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 
-/** One replanning run. The full ReplanResponse is stored as JSON so /accept can apply the chosen option. */
+//One replanning run. The full ReplanResponse is stored as JSON so /accept can apply the chosen option
 @Entity
 @Table(name = "replan_run")
 @Getter
@@ -36,7 +36,7 @@ public class ReplanRun {
     @Column(nullable = false)
     private long seed;
 
-    /** JSON text of ReplanResponse. */
+    //JSON text of ReplanResponse
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(nullable = false)
     private String response;

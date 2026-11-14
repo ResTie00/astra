@@ -5,7 +5,7 @@ import kg.astra.domain.HealthStatus;
 import java.time.Instant;
 import java.util.List;
 
-/** GET /api/crew/{id}/status. Doses here are in mSv (display units). */
+//GET /api/crew/{id}/status. Doses here are in mSv (display units)
 public record CrewStatusResponse(
         String crewId,
         String name,

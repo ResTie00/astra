@@ -8,11 +8,8 @@ import kg.astra.domain.TaskType;
 
 import java.util.List;
 
-/**
- * Manual check of the dose model. Lives in src/test: it is not part of the application.
- * All numbers are DUMMY and do NOT match the simulator. Real values come from the team's
- * agreed source (configuration), never from this file.
- */
+// quick manual check of the dose model and the storm sampler, run it from the IDE.
+// not part of the app. numbers here are made up and don't match the simulator
 public class DoseDemo {
     public static void main(String[] args) {
         double nominalAttenuation = 0.2;

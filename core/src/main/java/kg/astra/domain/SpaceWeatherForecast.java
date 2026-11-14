@@ -1,10 +1,10 @@
 package kg.astra.domain;
 
-/**
- * Expected solar particle event inside the planning horizon (in slots).
- *
- * @param peakProtonFluxPfu proton flux at peak, >=10 MeV channel, pfu
- */
+
+//xpected solar particle event inside the planning horizon (in slots).
+
+//peakProtonFluxPfu is a proton flux at peak, >=10 MeV channel, pfu
+
 public record SpaceWeatherForecast(boolean stormExpected, int onsetSlot, int peakSlot,
                                    int durationSlots, double peakProtonFluxPfu) {
 

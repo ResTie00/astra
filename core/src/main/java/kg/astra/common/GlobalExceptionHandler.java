@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-/** Turns common errors into readable JSON (RFC 7807 ProblemDetail) instead of stack traces. */
+//Turns common errors into readable JSON (RFC 7807 ProblemDetail) instead of stack traces.
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

@@ -1,9 +1,9 @@
 package kg.astra.domain;
 
-/**
- * Machine-readable reason for a plan change. Core turns it into human text,
- * so the solver never produces UI strings.
- */
+
+//Machine-readable reason for a plan change. Core turns it into human text
+// so the solver never produces UI strings.
+
 public enum ChangeReason {
     MOVED_AFTER_STORM_PEAK,
     MOVED_BEFORE_STORM_PEAK,

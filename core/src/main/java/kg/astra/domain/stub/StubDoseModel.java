@@ -5,10 +5,11 @@ import kg.astra.domain.SpaceWeatherForecast;
 import kg.astra.domain.SpeScenario;
 import kg.astra.domain.TaskType;
 
-/**
- * PLACEHOLDER numbers so the system runs end to end. Arsen replaces them with
- * sourced values. Do not put these numbers on a slide.
- */
+
+//PLACEHOLDER numbers so the system runs end to end. Arsen replaces them with
+//sourced values. Do not put these numbers on a slide.
+
+
 public class StubDoseModel implements DoseModel {
 
     @Override
@@ -42,7 +43,7 @@ public class StubDoseModel implements DoseModel {
         };
     }
 
-    /** Triangular storm profile: 0 at onset, 1 at peak, 0 at the end. */
+    //Triangular storm profile: 0 at onset, 1 at peak, 0 at the end
     private static double shape(int slot, int onset, int peak, int duration) {
         int end = onset + duration;
         if (slot < onset || slot >= end) return 0;

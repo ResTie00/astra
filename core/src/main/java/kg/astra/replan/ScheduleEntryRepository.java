@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ScheduleEntryRepository extends JpaRepository<ScheduleEntry, Long> {
 
-    /** Entries overlapping [from, to): start < to AND end > from. */
+    //Entries overlapping [from, to): start < to AND end > from
     List<ScheduleEntry> findByStartAtLessThanAndEndAtGreaterThanOrderByStartAt(Instant to, Instant from);
 
     List<ScheduleEntry> findByCrewIdOrderByStartAt(String crewId);

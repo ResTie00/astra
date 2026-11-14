@@ -17,7 +17,7 @@ class AlertController {
 
     private final AlertService alertService;
 
-    /** Latest 50 alerts, newest first. Live alerts also arrive over SSE as ALERT events. */
+    //Latest 50 alerts, newest first. Live alerts also arrive over SSE as ALERT events
     @GetMapping
     List<AlertDto> recent() {
         return alertService.recent();

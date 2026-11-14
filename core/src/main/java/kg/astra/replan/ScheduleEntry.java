@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
-/** One assignment of the current (accepted) schedule. */
+//One assignment of the current (accepted) schedule
 @Entity
 @Table(name = "schedule_entry")
 @Getter

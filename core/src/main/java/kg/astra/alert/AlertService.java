@@ -16,11 +16,9 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-/**
- * Creates alerts, stores them and pushes them to the UI over SSE.
- * Anti-spam: the same alert type for the same crew member (or mission-wide) at most once per COOLDOWN.
- * An alert people learn to ignore is worse than no alert.
- */
+// saves alerts and sends them to the UI right away.
+// the same alert for the same person shows up at most once an hour:
+// if alerts keep repeating, people start ignoring them, and that's worse than no alert
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -32,15 +30,14 @@ public class AlertService {
     private final SseHub sseHub;
     private final JsonMapper jsonMapper;
 
-    /**
-     * @param crewId   null for a mission-wide alert (e.g. a storm)
-     * @param evidence the data behind the alert (values, thresholds); stored as JSON, may be null
-     * @return the new alert, or empty if the same alert was raised recently
-     */
+    // crewId = null means the alert is for the whole mission, like a storm.
+    // evidence = the numbers behind the alert, saved as JSON so the doctor can see why it fired.
+    // returns empty if the same alert was already raised in the last hour
     @Transactional
     public Optional<AlertDto> raise(String crewId, AlertSeverity severity, String type,
                                     String message, Map<String, Object> evidence) {
         Instant since = Instant.now().minus(COOLDOWN);
+        // two different queries: in SQL "crew_id = null" never matches, we need "is null"
         boolean recent = crewId == null
                 ? alertRepository.existsByCrewIdIsNullAndTypeAndCreatedAtAfter(type, since)
                 : alertRepository.existsByCrewIdAndTypeAndCreatedAtAfter(crewId, type, since);
@@ -54,10 +51,12 @@ public class AlertService {
         return Optional.of(dto);
     }
 
+    // last 50 for the alerts list when the screen opens. new ones come live over SSE
     public List<AlertDto> recent() {
         return alertRepository.findTop50ByOrderByCreatedAtDesc().stream().map(Alert::toDto).toList();
     }
 
+    // no save() needed: inside a transaction hibernate notices the change and writes it on commit
     @Transactional
     public void acknowledge(long id) {
         Alert alert = alertRepository.findById(id)

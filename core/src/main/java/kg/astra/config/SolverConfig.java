@@ -19,7 +19,7 @@ public class SolverConfig {
 
     private static final Logger log = LoggerFactory.getLogger(SolverConfig.class);
 
-    /** Loads OR-Tools native libraries and solves a tiny model at startup, so the first real call is not slow. */
+    //Loads OR-Tools native libraries and solves a tiny model at startup, so the first real call is not slow
     @Bean
     public ApplicationRunner ortoolsWarmUp() {
         return args -> {
@@ -32,7 +32,7 @@ public class SolverConfig {
         };
     }
 
-    /** Solver and Monte Carlo are CPU-heavy: run them on their own small pool, not on request threads. */
+    //Solver and Monte Carlo are CPU-heavy: run them on their own small pool, not on request threads
     @Bean(destroyMethod = "shutdown")
     public ExecutorService solverExecutor() {
         return Executors.newFixedThreadPool(2);

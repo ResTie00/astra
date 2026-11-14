@@ -15,14 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-/**
- * Demo mission: tasks and a current schedule, relative to NOW (next full hour = hour 0).
- * Loaded on startup if there are no tasks; POST /api/demo/reset reloads it (e.g. right before the demo).
- *
- * Story: Maya (c2) has the antenna repair EVA at hour +21. The simulator's "storm" command
- * creates a storm from hour +20 for 18 h, so the EVA falls into the storm AND Maya is in a quiet decline.
- * Windows are wide, so the solver can always move EVAs after the storm.
- */
+//Demo mission: tasks and a current schedule, relative to NOW (next full hour = hour 0).
+//Loaded on startup if there are no tasks; POST /api/demo/reset reloads it (e.g. right before the demo).
+
+//Story: Maya (c2) has the antenna repair EVA at hour +21. The simulator's "storm" command
+//creates a storm from hour +20 for 18 h, so the EVA falls into the storm AND Maya is in a quiet decline.
+//Windows are wide, so the solver can always move EVAs after the storm.
 @Component
 @RequiredArgsConstructor
 @Slf4j

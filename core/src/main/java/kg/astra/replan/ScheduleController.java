@@ -22,7 +22,7 @@ class ScheduleController {
     private final MissionTaskRepository taskRepository;
     private final CrewRepository crewRepository;
 
-    /** Current accepted plan for the next 72 hours. */
+    //Current accepted plan for the next 72 hours
     @GetMapping("/schedule")
     PlanDto schedule() {
         Instant from = Instant.now().truncatedTo(ChronoUnit.HOURS);

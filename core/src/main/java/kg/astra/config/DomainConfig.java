@@ -15,11 +15,9 @@ import kg.astra.risk.SpeScenarioSampler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * The only place where module implementations are plugged into Spring.
- * Mansur's and Arsen's code stays free of Spring annotations.
- * To switch from a stub to the real implementation, change one line here.
- */
+
+//The only place where module implementations are plugged into Spring.
+// To switch from a stub to the real implementation, change one line here.
 @Configuration
 public class DomainConfig {
 

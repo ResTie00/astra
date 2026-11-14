@@ -9,12 +9,11 @@ import jakarta.validation.constraints.PositiveOrZero;
 import java.time.Instant;
 import java.util.List;
 
-/**
- * POST /api/checkin. Used by the UI (live) and by the simulator (history for past days).
- *
- * @param timestamp      null = server time (UI); simulator sends explicit past timestamps
- * @param reactionMeanMs null if the reaction test was skipped
- */
+//POST /api/checkin. Used by the UI (live) and by the simulator (history for past days).
+
+//timestamp          null = server time (UI); simulator sends explicit past timestamps
+//reactionMeanMs     null if the reaction test was skipped
+
 public record CheckinRequest(
         @NotBlank String crewId,
         Instant timestamp,

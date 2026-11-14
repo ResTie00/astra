@@ -26,7 +26,7 @@ public class Alert {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /** null = mission-wide alert. */
+    //null = mission-wide alert
     @Column(name = "crew_id")
     private String crewId;
 
@@ -40,7 +40,7 @@ public class Alert {
     @Column(nullable = false)
     private String message;
 
-    /** JSON text with the data behind the alert (values, thresholds). */
+    //JSON text with the data behind the alert (values, thresholds)
     @JdbcTypeCode(SqlTypes.JSON)
     private String evidence;
 

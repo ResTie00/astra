@@ -21,6 +21,7 @@ class RecentValues {
     private final CheckinRepository checkinRepository;
 
     OptionalDouble hourlyMedianLast24h(String crewId, Metric metric, Instant now) {
+        // live data comes every few seconds, so the hourly median keeps the signal stable and removes spikes
         Instant from = now.minus(Duration.ofHours(24));
 
         List<TelemetryReading> readingList = telemetryRepository
@@ -68,7 +69,7 @@ class RecentValues {
         return values[mid];
     }
 
-    //
+    // dose is tracked as hourly medians summed over time, because the stream is noisy and we care about the total exposure
     double cumulativeDoseMicroSv(String crewId) {
         return telemetryRepository
                 .findByCrewIdAndMetricAndRecordedAtAfterOrderByRecordedAt(crewId, Metric.DOSE_RATE, Instant.EPOCH)

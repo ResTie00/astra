@@ -2,13 +2,12 @@ package kg.astra.domain;
 
 import java.util.Objects;
 
-/**
- * A unit of work to be scheduled.
- *
- * @param requiredSkill    null means anyone can do it
- * @param earliestStartSlot task cannot start before this slot
- * @param latestEndSlot    task must finish by this slot (exclusive end)
- */
+//A unit of work to be scheduled.
+
+// requiredSkill is a null means anyone can do it
+//earliestStartSlot is a task cannot start before this slot
+// latestEndSlot is a task must finish by this slot (exclusive end)
+
 public record Task(String id, String name, TaskType type, int durationSlots, String requiredSkill,
                    boolean mandatory, int earliestStartSlot, int latestEndSlot) {
 

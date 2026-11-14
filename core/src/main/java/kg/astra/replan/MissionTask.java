@@ -34,7 +34,7 @@ public class MissionTask {
     @Column(name = "duration_hours", nullable = false)
     private int durationHours;
 
-    /** null = anyone can do it. */
+    //null = anyone can do it
     @Column(name = "required_skill")
     private String requiredSkill;
 

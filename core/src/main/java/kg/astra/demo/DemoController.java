@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/** Reloads the demo mission relative to the current hour. Call it right before presenting. */
+//Reloads the demo mission relative to the current hour. Call it right before presenting
 @RestController
 @RequestMapping("/api/demo")
 @RequiredArgsConstructor

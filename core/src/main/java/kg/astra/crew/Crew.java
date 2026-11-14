@@ -29,7 +29,7 @@ public class Crew {
     @Column(nullable = false)
     private String role;
 
-    /** Comma-separated in the DB, exposed as a Set. */
+    // Comma-separated in the DB, exposed as a Set
     @Column(nullable = false)
     private String skills;
 

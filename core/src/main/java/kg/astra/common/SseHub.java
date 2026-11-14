@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/** Keeps connected SSE clients and broadcasts StreamEvents to all of them. */
+// Keeps connected SSE clients and broadcasts StreamEvents to all of them
 @Component
 public class SseHub {
 
@@ -37,7 +37,4 @@ public class SseHub {
         }
     }
 
-    public int clients() {
-        return emitters.size();
-    }
 }

@@ -9,7 +9,7 @@ import kg.astra.domain.SolverStatus;
 
 import java.util.List;
 
-/** Returns the current schedule unchanged. Lets Core and the UI work before CP-SAT is ready. */
+//Returns the current schedule unchanged. Lets Core and the UI work before CP-SAT is ready
 public class StubReplanner implements Replanner {
 
     @Override

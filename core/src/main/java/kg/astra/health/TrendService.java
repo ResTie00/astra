@@ -14,11 +14,12 @@ import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+// data for the blind spot chart: one point per day + a "your norm" band for each signal.
+// nothing is stored for this, we build it from telemetry and check-ins every time
 @Service
 @RequiredArgsConstructor
 class TrendService {
@@ -28,11 +29,13 @@ class TrendService {
     private final BaselineService baselineService;
 
     TrendsResponse trends(String crewId, int days) {
+        // days are counted in UTC, like everything else in the project
         Instant now = Instant.now();
         LocalDate today = LocalDate.ofInstant(now, ZoneOffset.UTC);
         LocalDate first = today.minusDays(days - 1L);
         Instant from = first.atStartOfDay(ZoneOffset.UTC).toInstant();
 
+        // sleep comes once a day. if there are two by accident, keep the last one
         Map<LocalDate, Double> sleep = telemetryRepository
                 .findByCrewIdAndMetricAndRecordedAtAfterOrderByRecordedAt(crewId, Metric.SLEEP_HOURS, from).stream()
                 .collect(Collectors.toMap(r -> day(r.getRecordedAt()), TelemetryReading::getValue, (a, b) -> b));
@@ -49,6 +52,7 @@ class TrendService {
                 .findByCrewIdAndRecordedAtAfterOrderByRecordedAt(crewId, from).stream()
                 .collect(Collectors.toMap(c -> day(c.getRecordedAt()), c -> c, (a, b) -> b));
 
+        // one point for every day, even empty ones: null makes a gap in the line instead of a fake zero
         List<TrendsResponse.Point> points = new ArrayList<>();
         for (LocalDate d = first; !d.isAfter(today); d = d.plusDays(1)) {
             Checkin c = checkins.get(d);
@@ -59,6 +63,8 @@ class TrendService {
                     c == null ? null : c.getWellbeing()));
         }
 
+        // sleep and reaction are daily already, so the normal baseline fits the chart.
+        // HRV baseline is hourly, so for a daily chart we build the band from daily values (see dailyBand)
         Map<Metric, Baseline> baselines = baselineService.baselineOf(crewId, now);
         return new TrendsResponse(crewId, points,
                 band(baselines.get(Metric.SLEEP_HOURS)),
@@ -66,6 +72,7 @@ class TrendService {
                 dailyBand(hrv, today));
     }
 
+    // every hour counts the same, no matter how many readings it has
     private static double medianOfHourlyMedians(List<TelemetryReading> readings) {
         double[] hourly = readings.stream()
                 .collect(Collectors.groupingBy(r -> r.getRecordedAt().truncatedTo(ChronoUnit.HOURS)))
@@ -75,13 +82,15 @@ class TrendService {
         return median(hourly);
     }
 
+    // BaselineService.median needs a sorted array, so sort a copy first
     private static double median(double[] values) {
         double[] sorted = values.clone();
         Arrays.sort(sorted);
         return BaselineService.median(sorted);
     }
 
-    /** Same scale as Baseline.z: max(1.4826·MAD, 2% of the median). Null when there is no norm yet. */
+    // band = median ± 2 scales, the same scale Baseline.z uses.
+    // so "outside the band" on the chart means the same as WATCH in the status. null if there is no norm yet
     private static TrendsResponse.Band band(Baseline b) {
         if (b == null || b.samples() == 0) return null;
         double scale = Math.max(1.4826 * b.mad(), 0.02 * Math.abs(b.median()));
@@ -95,7 +104,10 @@ class TrendService {
     private static Double round1(Double v) {
         return v == null ? null : Math.round(v * 10) / 10.0;
     }
-    /** Norm band built from daily values, excluding the last 3 days (same window rule as the baseline). */
+
+    // HRV band from daily values. the hourly band is too wide because of the day/night rhythm,
+    // and the daily points are already smoothed, so we compare daily with daily.
+    // skip the last 3 days, same rule as the baseline
     private static TrendsResponse.Band dailyBand(Map<LocalDate, Double> daily, LocalDate today) {
         double[] values = daily.entrySet().stream()
                 .filter(e -> e.getKey().isBefore(today.minusDays(2)))
