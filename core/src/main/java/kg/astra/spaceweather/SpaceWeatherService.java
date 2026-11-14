@@ -1,5 +1,7 @@
 package kg.astra.spaceweather;
 
+import kg.astra.alert.AlertService;
+import kg.astra.alert.AlertSeverity;
 import kg.astra.common.SseHub;
 import kg.astra.common.StreamEvent;
 import kg.astra.common.StreamEventType;
@@ -9,18 +11,39 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class SpaceWeatherService {
+
+    private static final DateTimeFormatter UTC_TIME =
+            DateTimeFormatter.ofPattern("MMM d, HH:mm 'UTC'", Locale.US).withZone(ZoneOffset.UTC);
+
     private final SpaceWeatherRepository spaceWeatherRepository;
     private final SseHub sseHub;
+    private final AlertService alertService;
 
     public void register(SpaceWeatherEventRequest request) {
         SpaceWeatherEvent weatherEvent = SpaceWeatherEvent.from(request);
         spaceWeatherRepository.save(weatherEvent);
         sseHub.publish(StreamEvent.of(StreamEventType.SPACE_WEATHER, request));
+
+        // one mission-wide alert, not one per crew member
+        Map<String, Object> evidence = new LinkedHashMap<>();
+        evidence.put("onset", request.onset().toString());
+        evidence.put("peak", request.peak().toString());
+        evidence.put("peakProtonFluxPfu", request.peakProtonFluxPfu());
+        evidence.put("durationHours", request.durationHours());
+        alertService.raise(null, AlertSeverity.CRITICAL, "SPACE_WEATHER",
+                String.format(Locale.US, "Solar particle event expected %s, peak %.0f pfu, %d h. Review EVA plans.",
+                        UTC_TIME.format(request.onset()), request.peakProtonFluxPfu(), request.durationHours()),
+                evidence);
     }
 
     public Optional<SpaceWeatherEvent> current() {
