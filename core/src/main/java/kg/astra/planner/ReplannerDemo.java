@@ -1,53 +1,43 @@
 package kg.astra.planner;
 
-import kg.astra.domain.Task;
+import kg.astra.domain.DoseModel;
+import kg.astra.domain.SpaceWeatherForecast;
+import kg.astra.domain.SpeScenario;
 import kg.astra.domain.TaskType;
 import kg.astra.planner.Replanner.*;
+
 import java.util.List;
 
-/** Toy run: 3 astronauts, one of them in ACTION status, 3 tasks. */
+/** Toy run. The dose model here is FAKE (only for testing the solver). Real one is Arsen's. */
 public class ReplannerDemo {
     public static void main(String[] args) {
+        DoseModel fakeDose = new DoseModel() {
+            @Override
+            public long expectedDoseMicroSv(TaskType type, int slot, SpaceWeatherForecast f) {
+                if (type == TaskType.EVA) return f.covers(slot) ? 10 : 2;
+                return 1;
+            }
+            @Override
+            public double sampleDoseMicroSv(TaskType type, int slot, SpeScenario s) {
+                return 0; // not used by the solver
+            }
+        };
+
+        // storm in slots [4, 14): the EVA (8 slots) cannot start before slot 14
+        SpaceWeatherForecast forecast = new SpaceWeatherForecast(true, 4, 8, 10, 100.0);
+
         List<Astronaut> crew = List.of(
-                new Astronaut("A1", Status.ACTION),   // must NOT get the EVA
-                new Astronaut("A2", Status.NORMAL),
-                new Astronaut("A3", Status.ATTENTION));
+                new Astronaut("A1", Status.ACTION, 1000),   // no EVA allowed
+                new Astronaut("A2", Status.NORMAL, 5),      // tiny budget: cannot take EVA
+                new Astronaut("A3", Status.NORMAL, 1000));
 
         List<Task> tasks = List.of(
-                new Task(
-                        "T1",
-                        "Assemble Engine",
-                        TaskType.EVA,
-                        3,
-                        "MECHANIC",
-                        true,
-                        0,
-                        8
-                ),
-                new Task(
-                        "T2",
-                        "Paint Body",
-                        TaskType.EXERCISE,
-                        2,
-                        "PAINTER",
-                        true,
-                        2,
-                        10
-                ),
-                new Task(
-                        "T3",
-                        "Quality Inspection",
-                        TaskType.INTERNAL,
-                        1,
-                        "INSPECTOR",
-                        false,
-                        5,
-                        12
-                )
-        );     // 3 hours
+                new Task("eva-1", TaskType.EVA, 8),
+                new Task("exercise-1", TaskType.EXERCISE, 4),
+                new Task("sleep-1", TaskType.SLEEP, 16),
+                new Task("internal-1", TaskType.INTERNAL, 6));
 
-        Replanner replanner = new Replanner(48);           // 48 slots = 24 hours
-        replanner.solve(crew, tasks).ifPresentOrElse(
+        new Replanner(48).solve(crew, tasks, forecast, fakeDose).ifPresentOrElse(
                 plan -> {
                     System.out.println("Makespan (slots): " + plan.makespanSlots());
                     plan.assignments().forEach(System.out::println);
