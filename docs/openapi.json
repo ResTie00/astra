@@ -299,6 +299,46 @@
                 }
             }
         },
+        "/api/crew/{id}/trends": {
+            "get": {
+                "tags": [
+                    "status-controller"
+                ],
+                "operationId": "trends",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "days",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 14
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TrendsResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/crew/{id}/status": {
             "get": {
                 "tags": [
@@ -922,6 +962,71 @@
                     "timeout": {
                         "type": "integer",
                         "format": "int64"
+                    }
+                }
+            },
+            "Band": {
+                "type": "object",
+                "properties": {
+                    "median": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "low": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "high": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "Point": {
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "sleepHours": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "reactionMs": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "hrvMs": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "selfRating": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "TrendsResponse": {
+                "type": "object",
+                "properties": {
+                    "crewId": {
+                        "type": "string"
+                    },
+                    "points": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Point"
+                        }
+                    },
+                    "sleepNorm": {
+                        "$ref": "#/components/schemas/Band"
+                    },
+                    "reactionNorm": {
+                        "$ref": "#/components/schemas/Band"
+                    },
+                    "hrvNorm": {
+                        "$ref": "#/components/schemas/Band"
                     }
                 }
             },

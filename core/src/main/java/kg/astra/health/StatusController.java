@@ -1,10 +1,7 @@
 package kg.astra.health;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,6 +10,7 @@ import java.util.List;
 @RequiredArgsConstructor
 class StatusController {
     private final StatusService statusService;
+    private final TrendService trendService;
 
     @GetMapping("/crew/{id}/status")
     CrewStatusResponse getCrewStatus(@PathVariable("id") String crewId){
@@ -21,5 +19,10 @@ class StatusController {
     @GetMapping("/crew")
     List<CrewStatusResponse> crew() {
         return statusService.statusOfAll();
+    }
+    @GetMapping("/crew/{id}/trends")
+    TrendsResponse trends(@PathVariable("id") String crewId,
+                          @RequestParam(defaultValue = "14") int days) {
+        return trendService.trends(crewId, Math.clamp(days, 1, 30));
     }
 }

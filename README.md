@@ -121,6 +121,5 @@ Swagger UI: `http://localhost:8080/swagger-ui.html` · spec snapshot: [docs/open
 
 ## Use of AI
 
-We used AI assistants during development, mainly for boilerplate code, code review and debugging. The architecture, the health logic (personal baseline, blind spot, area rules) and the planning model were designed, reviewed and tested by the team, and each of us can explain our part of the code.
-
+We used AI assistants during development: for parts of the code (including the telemetry simulator and several backend services), for code review, debugging and this README. The architecture, the health logic (personal baseline, blind spot, area rules) and the planning model were designed by the team; all code was reviewed and tested by us, and each of us can explain our part of it.
 *Source code codename: `astra` (package `kg.astra`).*
