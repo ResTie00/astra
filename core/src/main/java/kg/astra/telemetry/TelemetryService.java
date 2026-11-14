@@ -11,6 +11,6 @@ class telemetryService {
 
     @Transactional
     void saveTelemetry(TelemetryBatchRequest telemetryBatchRequest) {
-        if (telemetryBatchRequest.readings().size() <) {}
+
     }
 }
