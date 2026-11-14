@@ -7,6 +7,7 @@ package kg.astra.planner;
 
 import com.google.ortools.Loader;
 import com.google.ortools.sat.*;
+import kg.astra.domain.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,7 @@ import java.util.Optional;
 public class Replanner {
 
     // ---- draft shared records (to be agreed with the team) ----
-    public enum Status { NORMAL, ATTENTION, ACTION }          // norma / vnimanie / deistvuy
-    public enum TaskType { EVA, TRAINING, SLEEP, WORK }
+    public enum Status { NORMAL, ATTENTION, ACTION }
 
     public record Astronaut(String id, Status status) {}
     public record Task(String id, TaskType type, int durationSlots) {}

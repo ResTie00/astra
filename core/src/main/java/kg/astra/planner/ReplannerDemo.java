@@ -1,6 +1,7 @@
 package kg.astra.planner;
 
 import kg.astra.crew.Crew;
+import kg.astra.domain.TaskType;
 import kg.astra.planner.Replanner.*;
 
 import java.util.List;
@@ -14,9 +15,9 @@ public class ReplannerDemo {
                 new Astronaut("A3", Status.ATTENTION));
 
         List<Replanner.Task> tasks = List.of(
-                new Task("eva-1", Replanner.TaskType.EVA, 8),        // 4 hours
-                new Task("train-1", Replanner.TaskType.TRAINING, 4), // 2 hours
-                new Task("work-1", Replanner.TaskType.WORK, 6));     // 3 hours
+                new Task("eva-1", TaskType.EVA, 8),        // 4 hours
+                new Task("train-1", TaskType.EXERCISE, 4), // 2 hours
+                new Task("work-1", TaskType.INTERNAL, 6));     // 3 hours
 
         Replanner replanner = new Replanner(48);           // 48 slots = 24 hours
         replanner.solve(crew, tasks).ifPresentOrElse(
