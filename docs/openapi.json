@@ -276,36 +276,6 @@
                 }
             }
         },
-        "/api/debug/blind-spot/{crewId}": {
-            "get": {
-                "tags": [
-                    "debug-controller"
-                ],
-                "operationId": "blindSpot",
-                "parameters": [
-                    {
-                        "name": "crewId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/BlindSpotDto"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/api/crew": {
             "get": {
                 "tags": [
