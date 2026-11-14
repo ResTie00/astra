@@ -7,6 +7,8 @@ package kg.astra.planner;
 
 import com.google.ortools.Loader;
 import com.google.ortools.sat.*;
+import kg.astra.domain.Assignment;
+import kg.astra.domain.Task;
 import kg.astra.domain.TaskType;
 
 import java.util.ArrayList;
@@ -24,8 +26,7 @@ public class Replanner {
     public enum Status { NORMAL, ATTENTION, ACTION }
 
     public record Astronaut(String id, Status status) {}
-    public record Task(String id, TaskType type, int durationSlots) {}
-    public record Assignment(String taskId, String astronautId, int startSlot) {}
+//    public record Assignment(String taskId, String astronautId, int startSlot) {}
     public record Plan(List<Assignment> assignments, int makespanSlots) {}
 
     private final int horizonSlots;
