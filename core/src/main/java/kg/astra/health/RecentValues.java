@@ -68,5 +68,16 @@ class RecentValues {
         return values[mid];
     }
 
+    //
+    double cumulativeDoseMicroSv(String crewId) {
+        return telemetryRepository
+                .findByCrewIdAndMetricAndRecordedAtAfterOrderByRecordedAt(crewId, Metric.DOSE_RATE, Instant.EPOCH)
+                .stream()
+                .collect(Collectors.groupingBy(r -> r.getRecordedAt().truncatedTo(ChronoUnit.HOURS)))
+                .values().stream()
+                .mapToDouble(hour -> calculateMedian(hour.stream().mapToDouble(TelemetryReading::getValue).toArray()))
+                .sum();
+    }
+
 
 }
