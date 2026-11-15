@@ -10,7 +10,6 @@ NASA Space Apps Challenge 2026, Bishkek · Challenge: *Create Health Monitoring 
 
 ![ARGUS dashboard](docs/screenshots/dashboard.png)
 
-**Demo video (30 s):** VIDEO_LINK
 
 ---
 
@@ -123,6 +122,21 @@ Swagger UI: `http://localhost:8080/swagger-ui.html` · spec snapshot: [docs/open
 
 ## Use of AI
 
-We used AI assistants during development: for parts of the code (including the telemetry simulator and several backend services), for code review, debugging and this README. The architecture, the health logic (personal baseline, blind spot, area rules) and the planning model were designed by the team; all code was reviewed and tested by us, and each of us can explain our part of it.
+AI tools used: Claude (Anthropic) and GitHub Copilot. Where and how:
 
+| Part | How AI was used |
+|---|---|
+| Telemetry simulator (`simulator/`) | Written with AI, then reviewed and run by the team |
+| Core: health logic (`health/`: baseline, recent values, blind spot, status) | Written by Adilet; AI used for code review and debugging |
+| Core: data intake, replanning orchestration (`telemetry/`, `checkin/`, `spaceweather/`, `replan/` assembler and orchestrator) | Written by Adilet; AI used for code review and debugging |
+| Core: supporting services (`ReplanResponseMapper`, `AlertService`, `HealthMonitor`, `TrendService`, `DemoDataLoader`, storm forecast mapping, config classes) | Written with AI, then reviewed and tested by the team |
+| Planner and risk model (`planner/`, `risk/`) | Written by Mansur; AI used for code review and tuning advice |
+| Frontend (`web/`) | Written by Bekzat; AI suggested the color palette |
+| Code comments | Wording polished with AI |
+| Docker setup, this README, `docs/` | Drafted with AI, edited by the team |
+| Logo and pitch deck | Logo generated with AI; deck designed by Emir, text edited with AI |
+
+The architecture, the health logic (personal baseline, blind spot, area rules) and the planning model were designed by the team. All AI-written code was reviewed and tested by us, and each of us can explain our part.
+
+*Source code codename: `astra` (package `kg.astra`).*
 *Source code codename: `astra` (package `kg.astra`).*
