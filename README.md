@@ -8,7 +8,6 @@ NASA Space Apps Challenge 2026, Bishkek · Challenge: *Create Health Monitoring 
 > In Greek myth, Argus Panoptes was a guardian with a hundred eyes who never fully slept.
 > ARGUS watches over a crew that often does not sleep enough.
 
-![ARGUS dashboard](docs/screenshots/dashboard.png)
 
 
 ---
@@ -32,8 +31,6 @@ On a mission to Mars, a message to Earth takes up to 20 minutes one way, so astr
 3. ARGUS replans. The "Balanced" option gives the EVA to a rested crew member outside the storm and moves a second EVA after the storm peak: 2 changes in total, each with a reason.
 4. **Risk score 20 → 0. Hours of EVA by an impaired astronaut 4 → 0.** Maya accepts the plan with one tap, without waiting for Earth.
 
-![Blind spot](docs/screenshots/blind-spot.png)
-![Replanning](docs/screenshots/replan.png)
 
 ## NASA hazards and risks addressed
 
@@ -65,7 +62,6 @@ Telemetry simulator ──HTTP──▶ Core (Spring Boot) ──REST + SSE─�
 - **Planner:** CP-SAT model with hard rules (one executor per task, no overlaps, task windows, skills, no EVA during a storm, no EVA for an astronaut in "act" status, dose budget) and three objectives (balanced, lowest dose, fewest changes). Every change carries a machine-readable reason that is turned into plain language.
 - **Risk:** Monte Carlo over sampled storms with a fixed seed; all plans are evaluated on the same scenarios, so the difference between them is real, not sampling noise.
 
-Details: [docs/how-it-works.md](docs/how-it-works.md).
 
 ## Honest limits
 
