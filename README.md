@@ -8,8 +8,9 @@ NASA Space Apps Challenge 2026, Bishkek · Challenge: *Create Health Monitoring 
 > In Greek myth, Argus Panoptes was a guardian with a hundred eyes who never fully slept.
 > ARGUS watches over a crew that often does not sleep enough.
 
-<!-- TODO: hero screenshot of the astronaut dashboard -->
 ![ARGUS dashboard](docs/screenshots/dashboard.png)
+
+**Demo video (30 s):** VIDEO_LINK
 
 ---
 
@@ -22,7 +23,7 @@ On a mission to Mars, a message to Earth takes up to 20 minutes one way, so astr
 - **Personal baseline.** Every metric is compared with *this* astronaut's own norm, not a population average.
 - **Blind spot detection.** ARGUS compares how astronauts rate themselves with what their data shows (sleep, reaction time, heart rate variability) and flags the gap.
 - **Six health areas** with a clear status (normal / watch / act), an explanation and one recommended action: radiation, behavioral health, cardiovascular, immune, bone and muscle, habitat environment.
-- **Autonomous replanning.** When someone is impaired or a solar storm is coming, a constraint solver (Google OR-Tools CP-SAT) proposes 2-3 new schedules that respect every safety rule.
+- **Autonomous replanning.** When someone is impaired or a solar storm is coming, a constraint solver (Google OR-Tools CP-SAT) proposes up to three new schedules that respect every safety rule.
 - **Risk you can compare.** A Monte Carlo simulation over 2,000 storm scenarios scores the current plan and every option on the same scenarios. The astronaut picks a plan with one tap; the last word is always human.
 
 ## Demo story
@@ -30,9 +31,8 @@ On a mission to Mars, a message to Earth takes up to 20 minutes one way, so astr
 1. Maya Chen (flight engineer) has slept about 1.4 h less than her norm for three nights. Her reaction time is 11% slower and her HRV 23% below her norm. **She rates herself 4 out of 5. Her data says 1.0.** ARGUS raises a blind spot alert.
 2. A solar particle event is forecast. Maya's antenna repair EVA falls inside the storm window.
 3. ARGUS replans. The "Balanced" option gives the EVA to a rested crew member outside the storm and moves a second EVA after the storm peak: 2 changes in total, each with a reason.
-4. **Risk score 20 → 0. Hours of EVA by an impaired astronaut 4 → 0.** Maya accepts the plan; the ground learns about it with the communication delay.
+4. **Risk score 20 → 0. Hours of EVA by an impaired astronaut 4 → 0.** Maya accepts the plan with one tap, without waiting for Earth.
 
-<!-- TODO: screenshots of the blind spot panel and the plan comparison -->
 ![Blind spot](docs/screenshots/blind-spot.png)
 ![Replanning](docs/screenshots/replan.png)
 
@@ -42,7 +42,7 @@ On a mission to Mars, a message to Earth takes up to 20 minutes one way, so astr
 |---|---|---|
 | Space Radiation | Risk of Radiation-Induced Cancers | Cumulative dose vs. mission budget, storm forecast, EVAs moved out of the storm window |
 | Isolation and Confinement | Risk of Inadequate Sleep and Irregular Schedules; Risk of Behavioral Changes and Psychiatric Disorders | Blind spot: self-rating vs. sleep, reaction time and HRV against the personal baseline |
-| Distance from Earth | (hazard) | Decisions made on board; the ground view receives events with a delay |
+| Distance from Earth | (hazard) | Every decision is made on board; nothing waits for a reply from Earth |
 | Gravity Fields | Risk of Cardiovascular Adaptations; Risk of Spaceflight-Induced Bone Changes | Heart rate and HRV against the personal norm; bone and muscle shown as an indicator |
 | Hostile/Closed Environments | Risk of Hypoxia; Risk of Altered Immune System Responses | CO2 per habitat module, body temperature, reported symptoms |
 | Several at once | Risk of Injury and Compromised Performance from Spacewalks | A fatigued astronaut is taken off the EVA, and the risk is shown before and after |
@@ -56,7 +56,7 @@ Telemetry simulator ──HTTP──▶ Core (Spring Boot) ──REST + SSE─�
                                │
                                ├─ personal baseline · blind spot · six health areas · alerts
                                └─ replanning
-                                    MissionState ─▶ CP-SAT planner ─▶ 2-3 options
+                                    MissionState ─▶ CP-SAT planner ─▶ up to 3 options
                                                   ─▶ Monte Carlo (same 2,000 scenarios for all)
                                                   ─▶ comparison ─▶ astronaut accepts
 ```
@@ -77,12 +77,13 @@ Details: [docs/how-it-works.md](docs/how-it-works.md).
 
 ## Run it
 
-Requirements: Docker, Java 21, Maven.
+Requirements: Docker, Java 21, Maven, Node.js.
 
 ```bash
 docker compose up -d postgres
 cd core && ./mvnw spring-boot:run          # API on http://localhost:8080
 cd simulator && mvn -q compile exec:java   # 14 days of history, then live telemetry
+cd web && npm ci && npm run dev            # UI on http://localhost:5173
 ```
 
 Demo flow: `curl -X POST localhost:8080/api/demo/reset`, then type `storm` in the simulator console, then replan from the UI.
@@ -96,17 +97,18 @@ Swagger UI: `http://localhost:8080/swagger-ui.html` · spec snapshot: [docs/open
 | Endpoint | Purpose |
 |---|---|
 | `GET /api/crew`, `GET /api/crew/{id}/status` | Crew overview and one astronaut's six areas, blind spot and action |
+| `GET /api/crew/{id}/trends` | Daily sleep, reaction time, HRV and self-rating with personal norm bands |
 | `POST /api/checkin` | Self-rating and reaction test |
 | `POST /api/replan`, `POST /api/replan/{runId}/accept` | Propose options, accept one |
 | `GET /api/schedule`, `GET /api/space-weather/current`, `GET /api/alerts` | Current plan, storm, alerts |
 | `GET /api/stream` | Live updates (Server-Sent Events) |
 | `POST /api/telemetry`, `/api/environment`, `/api/space-weather` | Data intake (simulator) |
-| `GET /api/crew/{id}/trends` | Daily sleep, reaction time, HRV and self-rating with personal norm bands |
+
 ## Built with (open source)
 
 **Backend:** Java 21, Spring Boot, Spring Data JPA / Hibernate, Flyway, PostgreSQL, springdoc-openapi, Google OR-Tools (CP-SAT), Jackson, Lombok.
 **Simulator:** Java 21, Jackson.
-**Frontend:** React, Typescript, Vite, Axios, Zustand, TanStack Query, Lucide React, ECharts.
+**Frontend:** React, TypeScript, Vite, Axios, Zustand, TanStack Query, Lucide React, ECharts.
 **Infrastructure:** Docker, Docker Compose.
 
 ## Team
@@ -114,7 +116,7 @@ Swagger UI: `http://localhost:8080/swagger-ui.html` · spec snapshot: [docs/open
 | | Role |
 |---|---|
 | Adilet | Backend, health analytics (baseline, blind spot, status), integration |
-| Mansur | CP-SAT mission replanner |
+| Mansur | CP-SAT mission replanner, Monte Carlo risk model |
 | Bekzat | Frontend |
 | Emir | Design, pitch, research and sources |
 | Arsen | Team member: simulation and risk modelling design |
@@ -122,4 +124,5 @@ Swagger UI: `http://localhost:8080/swagger-ui.html` · spec snapshot: [docs/open
 ## Use of AI
 
 We used AI assistants during development: for parts of the code (including the telemetry simulator and several backend services), for code review, debugging and this README. The architecture, the health logic (personal baseline, blind spot, area rules) and the planning model were designed by the team; all code was reviewed and tested by us, and each of us can explain our part of it.
+
 *Source code codename: `astra` (package `kg.astra`).*
